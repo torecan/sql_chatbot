@@ -3,20 +3,17 @@
 
 docker-compose up --build
 
-# Endpoints 
+## Endpoints 
 
-## heathcheck
-localhost:1907/ 
+GET localhost:1907/  -> heathcheck
 
-## for sql results 
-localhost:1907/chat
+POST localhost:1907/chat  -> for sql results
 
 Header 
 "Content-Type": "application/json"
 
--> request body 
+Request-Body 
 {
-  "input": "Give me data of text column and join it with another table"
+  "input": "Give me invoice data of toyota cars"
 }
-
 
