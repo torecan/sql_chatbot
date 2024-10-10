@@ -1,6 +1,6 @@
 services:
   chatbot:
-    container_name: sql_chatbot_python_app
+    container_name: sql_chatbot_app_con
     build: .
     volumes:
       - ./app:/app
@@ -17,7 +17,7 @@ services:
       - sqlbot
 
   mysql:
-    container_name: sql_chatbot_mysql
+    container_name: sql_chatbot_mysql_con
     image: mysql:latest
     ports:
       - "3306:3306"
