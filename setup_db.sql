@@ -1,0 +1,26 @@
+CREATE DATABASE IF NOT EXISTS company;
+
+USE company;
+
+CREATE TABLE IF NOT EXISTS cars (
+    car_id INT AUTO_INCREMENT PRIMARY KEY,
+    make VARCHAR(255) NOT NULL,
+    model VARCHAR(255) NOT NULL,
+    year INT NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS invoice (
+    invoice_id INT AUTO_INCREMENT PRIMARY KEY,
+    car_id INT NOT NULL,
+    invoice_date DATE NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (car_id) REFERENCES cars(car_id) ON DELETE CASCADE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE USER 'user'@'%' IDENTIFIED BY 'secure_password';
+GRANT ALL PRIVILEGES ON company.* TO 'user'@'%';
+
+FLUSH PRIVILEGES;

@@ -1,0 +1,36 @@
+services:
+  chatbot:
+    container_name: sql_chatbot_python_app
+    build: .
+    volumes:
+      - ./app:/app
+    ports:
+      - "1907:1907" 
+    stdin_open: true  
+    tty: true 
+    environment:
+      - MYSQL_HOST=mysql 
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=root
+      - MYSQL_DATABASE=company
+    networks:
+      - sqlbot
+
+  mysql:
+    container_name: sql_chatbot_mysql
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./setup_db.sql:/docker-entrypoint-initdb.d/setup_db.sql
+    environment: 
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    networks:
+      - sqlbot
+
+networks:
+  sqlbot:

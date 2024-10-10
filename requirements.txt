@@ -1,0 +1,4 @@
+openai
+flask
+mysql-connector-python
+python-dotenv
